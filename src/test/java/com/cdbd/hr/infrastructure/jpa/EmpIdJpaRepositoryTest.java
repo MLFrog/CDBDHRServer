@@ -9,13 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.cdbd.hr.infrastructure.jpa.entity.EmpIdJpaEntity;
 import com.cdbd.hr.infrastructure.jpa.repository.EmpIdJpaRepository;
 
-@DataJpaTest
-public class EmpIdJpaRepositoryTest {
+public class EmpIdJpaRepositoryTest extends JpaRepositoryTest{
 
     private static final Logger logger = LoggerFactory.getLogger(EmpIdJpaRepositoryTest.class);
 
@@ -25,7 +23,7 @@ public class EmpIdJpaRepositoryTest {
     private EmpIdJpaEntity empIdJpaEntity;
 
     @BeforeEach
-    public void 객체생성() {
+    public void setUp() {
         // given: EmpIdJpaEntity 객체를 준비
         empIdJpaEntity = new EmpIdJpaEntity();
         empIdJpaEntity.setEmpId("E001");
@@ -49,7 +47,7 @@ public class EmpIdJpaRepositoryTest {
         assertThat(savedEntity.getCreatedAt()).isNotNull();
         assertThat(savedEntity.getUpdatedAt()).isNotNull();
 
-        logger.info("사번생성하기: {}", savedEntity); 
+        logger.info("사번 생성 테스트 완료: {}", savedEntity); 
     }
 
     @Test
@@ -65,7 +63,7 @@ public class EmpIdJpaRepositoryTest {
         assertThat(foundEntity.getEmpId()).isEqualTo("E001");
         assertThat(foundEntity.getUseYn()).isEqualTo("Y");
 
-        logger.info("사번조회하기: {}", foundEntity); 
+        logger.info("사번 조회 테스트 완료: {}", foundEntity); 
     }
 
     @Test
@@ -80,6 +78,6 @@ public class EmpIdJpaRepositoryTest {
         EmpIdJpaEntity foundEntity = empIdJpaRepository.findById("E001").orElse(null);
 
         assertThat(foundEntity).isNull();
-        logger.info("사번삭제하기: {}", foundEntity); 
+        logger.info("사번 삭제 테스트 완료. 삭제된 사번: E001"); 
     }
 }

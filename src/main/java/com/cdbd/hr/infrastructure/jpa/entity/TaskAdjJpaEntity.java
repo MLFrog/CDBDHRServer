@@ -1,6 +1,6 @@
 package com.cdbd.hr.infrastructure.jpa.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import org.hibernate.annotations.Comment;
 

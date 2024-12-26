@@ -78,7 +78,7 @@ public class EmpJpaEntity {
 
     @Column(name = "salary")
     @Comment("연봉")
-    private Double salary;
+    private Integer salary;
 
     @Column(name = "bank")
     @Comment("계좌 은행")

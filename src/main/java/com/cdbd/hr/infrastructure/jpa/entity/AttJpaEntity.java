@@ -39,19 +39,19 @@ public class AttJpaEntity {
 
     @Column(name = "work_hours")
     @Comment("근무시간(일)")
-    private Integer workHours;
+    private Double workHours;
 
     @Column(name = "break_hours")
     @Comment("휴게시간(일)")
-    private Integer breakHours;
+    private Double breakHours;
     
     @Column(name = "over_time_hours")
     @Comment("연장근무시간(일)")
-    private Integer overTimeHours;
+    private Double overTimeHours;
 
     @Column(name = "night_work_hours")
     @Comment("야간연장근무시간(일)")
-    private Integer nightWorkHours;
+    private Double nightWorkHours;
 
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Comment("생성일시")

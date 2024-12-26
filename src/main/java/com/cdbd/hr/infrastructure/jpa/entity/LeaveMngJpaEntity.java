@@ -1,6 +1,6 @@
 package com.cdbd.hr.infrastructure.jpa.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import org.hibernate.annotations.Comment;
 
@@ -45,11 +45,11 @@ public class LeaveMngJpaEntity {
     @Comment("잔여개수")
     private Integer remainCount;
 
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@Comment("생성일시")
-	private Timestamp createdAt;
-	
-	@Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@Comment("수정일시")
-	private Timestamp updatedAt;
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Comment("생성일시")
+    private Timestamp createdAt;
+
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Comment("수정일시")
+    private Timestamp updatedAt;
 }

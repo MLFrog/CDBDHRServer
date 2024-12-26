@@ -1,14 +1,12 @@
 package com.cdbd.hr.infrastructure.jpa.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import org.hibernate.annotations.Comment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -23,10 +21,9 @@ public class LeaveUsageJpaHisEntity {
     @Comment("사번")
     private String empId;
     
-    @ManyToOne
-    @JoinColumn(name = "leave_type", referencedColumnName = "leave_type")
+    @Column(name = "leave_type")
     @Comment("연차유형")   
-    private LeaveMngJpaEntity leaveType;
+    private String leaveType;
 
     @Column(name = "std_ymd")
     @Comment("기준일")
