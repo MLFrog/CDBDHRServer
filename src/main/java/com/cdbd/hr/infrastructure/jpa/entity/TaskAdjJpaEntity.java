@@ -15,7 +15,7 @@ import lombok.Data;
 @Table(name = "task_adjustment")
 @Comment("업무 가감")
 public class TaskAdjJpaEntity {
-	
+
     @Id
     @Column(name = "emp_id")
     @Comment("사번")
@@ -30,7 +30,7 @@ public class TaskAdjJpaEntity {
     private String stdYmd;
 
     @Column(name = "sta_hms")
-    @Comment("시작시간")    
+    @Comment("시작시간")
     private String startHms;
 
     @Column(name = "end_hms")

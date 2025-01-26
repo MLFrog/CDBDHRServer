@@ -19,7 +19,7 @@ import jakarta.transaction.Transactional;
 public class LeaveUsageJpaHisRepositoryTest extends JpaRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(LeaveUsageJpaHisRepositoryTest.class);
- 
+
     @Autowired
     private LeaveUsageJpaHisRepository leaveUsageJpaHisRepository;
 
@@ -31,7 +31,7 @@ public class LeaveUsageJpaHisRepositoryTest extends JpaRepositoryTest {
         // 1. 연차 사용 내역 엔티티 생성
         leaveUsageJpaHisEntity = new LeaveUsageJpaHisEntity();
         leaveUsageJpaHisEntity.setEmpId("E001");
-        leaveUsageJpaHisEntity.setLeaveType("연차휴가"); 
+        leaveUsageJpaHisEntity.setLeaveType("연차휴가");
         leaveUsageJpaHisEntity.setStdYmd("20240115");
         leaveUsageJpaHisEntity.setUsedCount(2);
         leaveUsageJpaHisEntity.setCreatedAt(new Timestamp(System.currentTimeMillis()));

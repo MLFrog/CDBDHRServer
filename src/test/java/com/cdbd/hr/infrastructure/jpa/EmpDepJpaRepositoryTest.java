@@ -10,10 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cdbd.hr.infrastructure.jpa.entity.EmpDepJpaEntity;
 import com.cdbd.hr.infrastructure.jpa.entity.DepJpaEntity;
-import com.cdbd.hr.infrastructure.jpa.repository.EmpDepJpaRepository;
+import com.cdbd.hr.infrastructure.jpa.entity.EmpDepJpaEntity;
 import com.cdbd.hr.infrastructure.jpa.repository.DepJpaRepository;
+import com.cdbd.hr.infrastructure.jpa.repository.EmpDepJpaRepository;
 
 public class EmpDepJpaRepositoryTest extends JpaRepositoryTest {
 

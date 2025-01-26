@@ -54,7 +54,7 @@ public class EmpJpaRepositoryTest extends JpaRepositoryTest {
 
         // when: 데이터를 저장하고 반환된 엔티티를 확인
         EmpJpaEntity savedEntity = empJpaRepository.save(empJpaEntity);
-        
+
         // then: 저장된 엔티티의 필드 값이 정확한지 검증
         assertThat(savedEntity.getEmpId()).isEqualTo("E001");
         assertThat(savedEntity.getName()).isEqualTo("김철수");
@@ -68,7 +68,7 @@ public class EmpJpaRepositoryTest extends JpaRepositoryTest {
     public void 사원조회하기() {
         // given: Entity를 저장
         empJpaRepository.save(empJpaEntity);
-        
+
         // when: 특정 empId로 엔티티를 조회
         EmpJpaEntity foundEntity = empJpaRepository.findById("E001").orElse(null);
 
@@ -84,10 +84,10 @@ public class EmpJpaRepositoryTest extends JpaRepositoryTest {
     public void 사원삭제하기() {
         // given: Entity 저장
         empJpaRepository.save(empJpaEntity);
-        
+
         // when: 엔티티 삭제
         empJpaRepository.deleteById("E001");
-        
+
         // then: 삭제 후 조회하여 null 반환되는지 확인
         EmpJpaEntity foundEntity = empJpaRepository.findById("E001").orElse(null);
 

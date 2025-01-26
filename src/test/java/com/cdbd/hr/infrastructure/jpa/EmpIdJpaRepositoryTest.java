@@ -30,7 +30,7 @@ public class EmpIdJpaRepositoryTest extends JpaRepositoryTest{
         empIdJpaEntity.setUseYn("Y");
         empIdJpaEntity.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         empIdJpaEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        
+
         logger.info("객체생성확인: {}", empIdJpaEntity);
     }
 
@@ -47,7 +47,7 @@ public class EmpIdJpaRepositoryTest extends JpaRepositoryTest{
         assertThat(savedEntity.getCreatedAt()).isNotNull();
         assertThat(savedEntity.getUpdatedAt()).isNotNull();
 
-        logger.info("사번 생성 테스트 완료: {}", savedEntity); 
+        logger.info("사번 생성 테스트 완료: {}", savedEntity);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class EmpIdJpaRepositoryTest extends JpaRepositoryTest{
         assertThat(foundEntity.getEmpId()).isEqualTo("E001");
         assertThat(foundEntity.getUseYn()).isEqualTo("Y");
 
-        logger.info("사번 조회 테스트 완료: {}", foundEntity); 
+        logger.info("사번 조회 테스트 완료: {}", foundEntity);
     }
 
     @Test
@@ -78,6 +78,6 @@ public class EmpIdJpaRepositoryTest extends JpaRepositoryTest{
         EmpIdJpaEntity foundEntity = empIdJpaRepository.findById("E001").orElse(null);
 
         assertThat(foundEntity).isNull();
-        logger.info("사번 삭제 테스트 완료. 삭제된 사번: E001"); 
+        logger.info("사번 삭제 테스트 완료. 삭제된 사번: E001");
     }
 }

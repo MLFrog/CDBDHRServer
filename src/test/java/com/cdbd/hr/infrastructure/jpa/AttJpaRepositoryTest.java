@@ -80,7 +80,7 @@ public class AttJpaRepositoryTest extends JpaRepositoryTest {
         logger.info("근태 조회 테스트 완료: {}", foundEntity);
     }
 
-    @Test 
+    @Test
     @Transactional
     public void 근태삭제하기() {
         // given: Entity 저장

@@ -18,5 +18,5 @@ public class Department {
 	private String endYmd;
     private Instant createdAt;
     private Instant updatedAt;
-    
+
 }

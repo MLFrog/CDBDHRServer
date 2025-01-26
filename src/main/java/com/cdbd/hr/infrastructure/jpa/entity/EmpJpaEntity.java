@@ -17,7 +17,7 @@ import lombok.Data;
 @Table(name = "employee")
 @Comment("사원 정보")
 public class EmpJpaEntity {
-	
+
     @Id
     @Column(name = "emp_id")
     @Comment("사번")

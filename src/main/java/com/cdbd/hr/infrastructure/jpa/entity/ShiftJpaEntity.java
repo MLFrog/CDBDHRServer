@@ -15,8 +15,8 @@ import lombok.Data;
 @Table(name = "shift")
 @Comment("근무조")
 public class ShiftJpaEntity {
-	
-    @Id  
+
+    @Id
     @Column(name = "shift_id")
     @Comment("근무형태(근무조)")
     private String shiftId;

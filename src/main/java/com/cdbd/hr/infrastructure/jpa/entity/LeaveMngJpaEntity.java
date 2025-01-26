@@ -18,13 +18,13 @@ public class LeaveMngJpaEntity {
 
     @Id
     @Column(name = "leave_type")
-    @Comment("연차유형")   
+    @Comment("연차유형")
     private String leaveType;
 
     @Column(name = "emp_id")
     @Comment("사번")
     private String empId;
-    
+
     @Column(name = "sta_ymd")
     @Comment("시작일")
     private String staYmd;

@@ -7,10 +7,10 @@ import com.cdbd.hr.infrastructure.jpa.entity.LeaveUsageJpaHisEntity;
 
 @Repository
 public interface LeaveUsageJpaHisRepository extends JpaRepository<LeaveUsageJpaHisEntity, String> {
-	
+
 	//사번과 휴가유형, 기준일을 기준으로 조회
 	LeaveUsageJpaHisEntity findByEmpIdAndLeaveTypeAndStdYmd(String empId, String leaveType, String stdYmd);
-	
-	//사번과 휴가유형을 기준일을 기준으로 삭제 
+
+	//사번과 휴가유형을 기준일을 기준으로 삭제
 	void deleteByEmpIdAndLeaveTypeAndStdYmd(String empId, String leaveType, String stdYmd);
 }

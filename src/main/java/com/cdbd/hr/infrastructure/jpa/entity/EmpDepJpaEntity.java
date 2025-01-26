@@ -47,7 +47,7 @@ public class EmpDepJpaEntity {
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Comment("생성일시")
 	private Timestamp createdAt;
-	
+
 	@Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Comment("수정일시")
 	private Timestamp updatedAt;

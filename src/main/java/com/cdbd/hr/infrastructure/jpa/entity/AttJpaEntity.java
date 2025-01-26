@@ -24,7 +24,7 @@ public class AttJpaEntity {
     @Column(name = "std_ymd")
     @Comment("기준일")
     private String stdYmd;
-    
+
     @Column(name = "holiday_yn")
     @Comment("휴일여부")
     private String holidayYn;
@@ -44,7 +44,7 @@ public class AttJpaEntity {
     @Column(name = "break_hours")
     @Comment("휴게시간(일)")
     private Double breakHours;
-    
+
     @Column(name = "over_time_hours")
     @Comment("연장근무시간(일)")
     private Double overTimeHours;
@@ -56,7 +56,7 @@ public class AttJpaEntity {
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Comment("생성일시")
 	private Timestamp createdAt;
-	
+
 	@Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Comment("수정일시")
 	private Timestamp updatedAt;

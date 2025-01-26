@@ -87,7 +87,7 @@ public class LeaveMngJpaRepositoryTest extends JpaRepositoryTest {
 
         // then: 삭제 후 조회하여 null 반환되는지 검증
         LeaveMngJpaEntity foundEntity = leaveMngJpaRepository.findByEmpIdAndLeaveType("E001", "연차휴가");
-        
+
         assertThat(foundEntity).isNull();
         logger.info("연차 삭제 테스트 완료. 삭제된 연차: annual");
     }

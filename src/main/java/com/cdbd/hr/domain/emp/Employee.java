@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @DomainEntity
 public class Employee {
-	
+
     private EmpId empId;
     private ShiftJpaEntity shiftId;
     private String name;

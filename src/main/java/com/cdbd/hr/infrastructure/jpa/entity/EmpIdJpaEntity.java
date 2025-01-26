@@ -20,11 +20,11 @@ public class EmpIdJpaEntity {
 	@Column(name = "emp_id")
     @Comment("사번")
     private String empId;
-    
+
     @Column(name = "use_yn")
     @Comment("사용 여부")
     private String useYn;
-    
+
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Comment("생성일시")
     private Timestamp createdAt;

@@ -86,7 +86,7 @@ public class TaskAdjJpaRepositoryTest extends JpaRepositoryTest {
 
         // then: 삭제 후 조회하여 null 반환되는지 검증
         TaskAdjJpaEntity foundEntity = taskAdjJpaRepository.findByEmpIdAndStdYmd("E001", "20241226");
-        
+
         assertThat(foundEntity).isNull();
 
         logger.info("업무 가감 삭제 테스트 완료. 삭제된 사번: E001");
