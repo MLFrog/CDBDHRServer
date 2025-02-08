@@ -1,4 +1,4 @@
-package com.cdbd.hr.domain.dep.convert.impl;
+package com.cdbd.hr.domain.dep.convert;
 
 import com.cdbd.hr.domain.common.DomainConverter;
 import com.cdbd.hr.domain.dep.Department;

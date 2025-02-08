@@ -27,6 +27,7 @@ public class DepJpaRepositoryTest extends JpaRepositoryTest {
         // given: DepJpaEntity 객체를 준비
         depJpaEntity = new DepJpaEntity();
         depJpaEntity.setDepCode("D001");
+        depJpaEntity.setDepName("영업부");
         depJpaEntity.setPDepCode("PD001");
         depJpaEntity.setCDepCode("CD001");
         depJpaEntity.setTDepYn("Y");
@@ -47,6 +48,7 @@ public class DepJpaRepositoryTest extends JpaRepositoryTest {
 
         // then: 저장된 엔티티의 필드 값이 정확한지 검증
         assertThat(savedEntity.getDepCode()).isEqualTo("D001");
+        assertThat(savedEntity.getDepName()).isEqualTo("영업부");
         assertThat(savedEntity.getPDepCode()).isEqualTo("PD001");
         assertThat(savedEntity.getCDepCode()).isEqualTo("CD001");
         assertThat(savedEntity.getTDepYn()).isEqualTo("Y");
@@ -69,6 +71,7 @@ public class DepJpaRepositoryTest extends JpaRepositoryTest {
         // then: 조회된 엔티티의 값이 맞는지 확인
         assertThat(foundEntity).isNotNull();
         assertThat(foundEntity.getDepCode()).isEqualTo("D001");
+        assertThat(foundEntity.getDepName()).isEqualTo("영업부");
         assertThat(foundEntity.getPDepCode()).isEqualTo("PD001");
 
         logger.info("부서 조회 테스트 완료: {}", foundEntity);

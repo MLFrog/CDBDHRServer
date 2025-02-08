@@ -3,8 +3,6 @@ package com.cdbd.hr.domain.emp;
 import java.time.Instant;
 
 import com.cdbd.hr.domain.common.DomainEntity;
-import com.cdbd.hr.domain.emp.empId.EmpId;
-import com.cdbd.hr.infrastructure.jpa.entity.ShiftJpaEntity;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 @DomainEntity
 public class Employee {
 
-    private EmpId empId;
-    private ShiftJpaEntity shiftId;
+    private String empId;
+    private String shiftId; //수정 필요
     private String name;
     private String ssn;
     private String nationality;

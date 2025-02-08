@@ -21,6 +21,10 @@ public class DepJpaEntity {
 	@Comment("부서코드")
 	private String depCode;
 
+    @Column(name = "dep_name")
+    @Comment("부서명")
+    private String depName;
+	
 	@Column(name = "p_dep_code")
 	@Comment("상위부서코드")
 	private String pDepCode;

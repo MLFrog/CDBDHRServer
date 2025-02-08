@@ -11,6 +11,7 @@ import lombok.Data;
 public class Department {
 
 	private String depCode;
+	private String depName;
 	private String pDepCode;
 	private String cDepCode;
 	private String tDepYn;
@@ -18,5 +19,6 @@ public class Department {
 	private String endYmd;
     private Instant createdAt;
     private Instant updatedAt;
+
 
 }
