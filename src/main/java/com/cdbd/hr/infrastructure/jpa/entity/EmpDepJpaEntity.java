@@ -6,8 +6,9 @@ import org.hibernate.annotations.Comment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -17,14 +18,18 @@ import lombok.Data;
 @Table(name = "emp_dep")
 @Comment("사번-부서 관계")
 public class EmpDepJpaEntity {
-
-    @Id
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+    private Long id;
+	
     @Column(name = "emp_id")
     @Comment("사번")
     private String empId;
 
     @ManyToOne
-    @JoinColumn(name = "dep_code", referencedColumnName = "dep_code")
+    @Column(name = "dep_code")
     @Comment("부서코드")
     private DepJpaEntity depCode;
 

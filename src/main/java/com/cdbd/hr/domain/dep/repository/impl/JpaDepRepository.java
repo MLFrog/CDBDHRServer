@@ -61,7 +61,7 @@ public class JpaDepRepository implements DepRepository{
     private DepJpaEntity convert(Department  data) {
     	DepJpaEntity obj = new DepJpaEntity();
     	
-        obj.setDepCode(Optional.ofNullable(data.getDepCode()).orElse(null));
+        obj.setDepCode(String.valueOf(Optional.ofNullable(data.getDepCode()).orElse(null)));
         obj.setPDepCode(Optional.ofNullable(data.getPDepCode()).orElse(null));
         obj.setCDepCode(Optional.ofNullable(data.getCDepCode()).orElse(null));
         obj.setTDepYn(Optional.ofNullable(data.getTDepYn()).orElse("N"));
