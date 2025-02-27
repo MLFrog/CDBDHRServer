@@ -3,6 +3,7 @@ package com.cdbd.hr.domain.dep;
 import java.time.Instant;
 
 import com.cdbd.hr.domain.common.DomainEntity;
+import com.cdbd.hr.domain.dep.IDTypes.DepCode;
 
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import lombok.Data;
 @DomainEntity
 public class Department {
 
-	private String depCode;
+	private DepCode depCode;
 	private String depName;
 	private String pDepCode;
 	private String cDepCode;

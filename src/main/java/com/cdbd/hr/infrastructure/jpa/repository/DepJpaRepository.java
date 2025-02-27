@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.cdbd.hr.infrastructure.jpa.entity.DepJpaEntity;
 
 @Repository
-public interface DepJpaRepository extends JpaRepository<DepJpaEntity, String> {}
+public interface DepJpaRepository extends JpaRepository<DepJpaEntity, Long> {}
 

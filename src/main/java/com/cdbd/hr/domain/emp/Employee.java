@@ -2,18 +2,19 @@ package com.cdbd.hr.domain.emp;
 
 import java.time.Instant;
 
+import com.cdbd.hr.domain.att.IDTypes.ShiftId;
 import com.cdbd.hr.domain.common.DomainEntity;
+import com.cdbd.hr.domain.emp.IDTypes.EmpId;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
 @DomainEntity
 public class Employee {
 
-    private String empId;
-    private String shiftId; //수정 필요
+    private EmpId empId;
+	private String useYn;
+    private ShiftId shiftId; //수정 필요
     private String name;
     private String ssn;
     private String nationality;

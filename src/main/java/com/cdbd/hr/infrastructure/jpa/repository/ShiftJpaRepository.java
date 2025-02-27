@@ -6,4 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.cdbd.hr.infrastructure.jpa.entity.ShiftJpaEntity;
 
 @Repository
-public interface ShiftJpaRepository extends JpaRepository<ShiftJpaEntity, String> {}
+public interface ShiftJpaRepository extends JpaRepository<ShiftJpaEntity, Long> {}

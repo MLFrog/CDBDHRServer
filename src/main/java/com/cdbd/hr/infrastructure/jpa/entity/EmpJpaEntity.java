@@ -6,8 +6,9 @@ import org.hibernate.annotations.Comment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -18,15 +19,19 @@ import lombok.Data;
 @Comment("사원 정보")
 public class EmpJpaEntity {
 
-    @Id
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+    private Long id;
+	
     @Column(name = "emp_id")
     @Comment("사번")
     private String empId;
 
     @ManyToOne
-    @JoinColumn(name = "shift_id", referencedColumnName = "shift_id")
+    @Column(name = "shift_id")
     @Comment("근무형태(근무조)")
-    private ShiftJpaEntity shiftId;
+    private String shiftId;
 
     @Column(name = "name")
     @Comment("이름")

@@ -33,7 +33,7 @@ public class AttJpaRepositoryTest extends JpaRepositoryTest {
         attJpaEntity.setHolidayYn("N");
         attJpaEntity.setInTime("20241220080000");
         attJpaEntity.setOutTime("20241220170000");
-        attJpaEntity.setWorkHours(8.0);
+        attJpaEntity.setWorkHours(8.0); 
         attJpaEntity.setBreakHours(1.0);
         attJpaEntity.setOverTimeHours(2.0);
         attJpaEntity.setNightWorkHours(0.0);

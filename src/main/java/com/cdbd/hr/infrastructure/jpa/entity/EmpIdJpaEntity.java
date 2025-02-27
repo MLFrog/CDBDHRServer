@@ -6,6 +6,8 @@ import org.hibernate.annotations.Comment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -17,6 +19,10 @@ import lombok.Data;
 public class EmpIdJpaEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+    private Long id;
+	
 	@Column(name = "emp_id")
     @Comment("사번")
     private String empId;

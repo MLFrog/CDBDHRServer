@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.cdbd.hr.infrastructure.jpa.entity.LeaveMngJpaEntity;
 
 @Repository
-public interface LeaveMngJpaRepository extends JpaRepository<LeaveMngJpaEntity, String> {
+public interface LeaveMngJpaRepository extends JpaRepository<LeaveMngJpaEntity, Long> {
 
 	//사번과 휴가유형을 기준으로 조회
 	LeaveMngJpaEntity findByEmpIdAndLeaveType(String empId, String leaveType);

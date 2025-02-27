@@ -6,6 +6,8 @@ import org.hibernate.annotations.Comment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -16,7 +18,11 @@ import lombok.Data;
 @Comment("근무조")
 public class ShiftJpaEntity {
 
-    @Id
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+    private Long id;
+	
     @Column(name = "shift_id")
     @Comment("근무형태(근무조)")
     private String shiftId;
