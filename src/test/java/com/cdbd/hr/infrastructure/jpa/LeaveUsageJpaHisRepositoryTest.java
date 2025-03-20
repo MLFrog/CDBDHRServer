@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,15 +65,16 @@ public class LeaveUsageJpaHisRepositoryTest extends JpaRepositoryTest {
         leaveUsageJpaHisRepository.save(leaveUsageJpaHisEntity);
 
         // when: 데이터 조회
-        LeaveUsageJpaHisEntity foundEntity = leaveUsageJpaHisRepository.findById("E001").orElse(null);
+        Optional<LeaveUsageJpaHisEntity> foundEntity = leaveUsageJpaHisRepository.findByEmpIdAndLeaveTypeAndStdYmd("E001", "연차휴가", "20240115");
 
         // then: 조회된 엔티티 값 검증
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getEmpId()).isEqualTo("E001");
-        assertThat(foundEntity.getLeaveType()).isEqualTo("연차휴가");
+        LeaveUsageJpaHisEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 연차 사용 내역이 존재하지 않습니다."));
+        assertThat(entity.getEmpId()).isEqualTo("E001");
+        assertThat(entity.getLeaveType()).isEqualTo("연차휴가");
 
-        logger.info("연차 사용 내역 조회 테스트 완료: {}", foundEntity);
+        logger.info("연차 사용 내역 조회 테스트 완료: {}", entity);
     }
+
 
     @Test
     @Transactional
@@ -84,7 +86,7 @@ public class LeaveUsageJpaHisRepositoryTest extends JpaRepositoryTest {
         leaveUsageJpaHisRepository.deleteByEmpIdAndLeaveTypeAndStdYmd("E001","연차휴가","20240115");
 
         // then: 삭제 후 데이터 조회
-        LeaveUsageJpaHisEntity foundEntity = leaveUsageJpaHisRepository.findByEmpIdAndLeaveTypeAndStdYmd("E001","연차휴가","20240115");
+        Optional<LeaveUsageJpaHisEntity> foundEntity = leaveUsageJpaHisRepository.findByEmpIdAndLeaveTypeAndStdYmd("E001","연차휴가","20240115");
         assertThat(foundEntity).isNull();
 
         logger.info("연차 사용 내역 삭제 테스트 완료. 삭제된 사번: E001");

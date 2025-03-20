@@ -50,4 +50,5 @@ public class TaskAdjJpaEntity {
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Comment("수정일시")
     private Timestamp updatedAt;
+
 }

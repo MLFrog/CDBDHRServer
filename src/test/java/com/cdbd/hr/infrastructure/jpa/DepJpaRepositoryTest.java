@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,16 +67,17 @@ public class DepJpaRepositoryTest extends JpaRepositoryTest {
         depJpaRepository.save(depJpaEntity);
 
         // when: 특정 depCode로 엔티티를 조회
-        DepJpaEntity foundEntity = depJpaRepository.findById("D001").orElse(null);
+        Optional<DepJpaEntity> foundEntity = depJpaRepository.findByDepId("D001");
 
         // then: 조회된 엔티티의 값이 맞는지 확인
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getDepCode()).isEqualTo("D001");
-        assertThat(foundEntity.getDepName()).isEqualTo("영업부");
-        assertThat(foundEntity.getPDepCode()).isEqualTo("PD001");
+        DepJpaEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 부서가 존재하지 않습니다."));
+        assertThat(entity.getDepCode()).isEqualTo("D001");
+        assertThat(entity.getDepName()).isEqualTo("영업부");
+        assertThat(entity.getPDepCode()).isEqualTo("PD001");
 
-        logger.info("부서 조회 테스트 완료: {}", foundEntity);
+        logger.info("부서 조회 테스트 완료: {}", entity);
     }
+
 
     @Test
     public void 부서삭제하기() {
@@ -83,10 +85,10 @@ public class DepJpaRepositoryTest extends JpaRepositoryTest {
         depJpaRepository.save(depJpaEntity);
 
         // when: 엔티티 삭제
-        depJpaRepository.deleteById("D001");
+        depJpaRepository.deleteByDepId("D001");
 
         // then: 삭제 후 조회하여 null 반환되는지 확인
-        DepJpaEntity foundEntity = depJpaRepository.findById("D001").orElse(null);
+        Optional<DepJpaEntity> foundEntity = depJpaRepository.findByDepId("D001");
 
         assertThat(foundEntity).isNull();
         logger.info("부서 삭제 테스트 완료. 삭제된 부서: D001");

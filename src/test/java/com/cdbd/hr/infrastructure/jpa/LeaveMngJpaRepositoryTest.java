@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,15 +67,16 @@ public class LeaveMngJpaRepositoryTest extends JpaRepositoryTest {
         leaveMngJpaRepository.save(leaveMngJpaEntity);
 
         // when: 특정 leaveType으로 엔티티 조회
-        LeaveMngJpaEntity foundEntity = leaveMngJpaRepository.findByEmpIdAndLeaveType("E001", "연차휴가");
+        Optional<LeaveMngJpaEntity> foundEntity = leaveMngJpaRepository.findByEmpIdAndLeaveType("E001", "연차휴가");
 
         // then: 조회된 엔티티 값 확인
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getLeaveType()).isEqualTo("연차휴가");
-        assertThat(foundEntity.getEmpId()).isEqualTo("E001");
+        LeaveMngJpaEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 연차 데이터가 존재하지 않습니다."));
+        assertThat(entity.getLeaveType()).isEqualTo("연차휴가");
+        assertThat(entity.getEmpId()).isEqualTo("E001");
 
-        logger.info("연차 조회 테스트 완료: {}", foundEntity);
+        logger.info("연차 조회 테스트 완료: {}", entity);
     }
+
 
     @Test
     @Transactional
@@ -86,7 +88,7 @@ public class LeaveMngJpaRepositoryTest extends JpaRepositoryTest {
         leaveMngJpaRepository.deleteByEmpIdAndLeaveType("E001", "연차휴가");
 
         // then: 삭제 후 조회하여 null 반환되는지 검증
-        LeaveMngJpaEntity foundEntity = leaveMngJpaRepository.findByEmpIdAndLeaveType("E001", "연차휴가");
+        Optional<LeaveMngJpaEntity> foundEntity = leaveMngJpaRepository.findByEmpIdAndLeaveType("E001", "연차휴가");
 
         assertThat(foundEntity).isNull();
         logger.info("연차 삭제 테스트 완료. 삭제된 연차: annual");

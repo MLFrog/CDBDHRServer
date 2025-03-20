@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,17 +81,18 @@ public class EmpDepJpaRepositoryTest extends JpaRepositoryTest {
         // given: 엔티티를 저장
         empDepJpaRepository.save(empDepJpaEntity);
 
-        // when: empId로 엔티티 조회
-        EmpDepJpaEntity foundEntity = empDepJpaRepository.findById("E001").orElse(null);
+        // when: empId와 depId로 엔티티 조회
+        Optional<EmpDepJpaEntity> foundEntity = empDepJpaRepository.findByEmpIdAndDepId("E001", "D001");
 
         // then: 조회된 엔티티의 값 확인
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getEmpId()).isEqualTo("E001");
-        assertThat(foundEntity.getDepCode().getDepCode()).isEqualTo("D001");  // 부서코드 확인
-        assertThat(foundEntity.getDepLeaderYn()).isEqualTo("Y");
+        EmpDepJpaEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 사번-부서 관계가 존재하지 않습니다."));
+        assertThat(entity.getEmpId()).isEqualTo("E001");
+        assertThat(entity.getDepCode().getDepCode()).isEqualTo("D001");  // 부서코드 확인
+        assertThat(entity.getDepLeaderYn()).isEqualTo("Y");
 
-        logger.info("사번-부서 관계 조회 테스트 완료: {}", foundEntity);
+        logger.info("사번-부서 관계 조회 테스트 완료: {}", entity);
     }
+
 
     @Test
     public void 사번_부서관계삭제하기() {
@@ -98,10 +100,10 @@ public class EmpDepJpaRepositoryTest extends JpaRepositoryTest {
         empDepJpaRepository.save(empDepJpaEntity);
 
         // when: 엔티티 삭제
-        empDepJpaRepository.deleteById("E001");
+        empDepJpaRepository.findByEmpIdAndDepId("E001","D001");
 
         // then: 삭제 후 조회하여 null인지 확인
-        EmpDepJpaEntity foundEntity = empDepJpaRepository.findById("E001").orElse(null);
+        Optional<EmpDepJpaEntity> foundEntity = empDepJpaRepository.findByEmpIdAndDepId("E001","D001");
         assertThat(foundEntity).isNull();
 
         logger.info("사번-부서 관계 삭제 테스트 완료. 삭제된 엔티티: {}", empDepJpaEntity);

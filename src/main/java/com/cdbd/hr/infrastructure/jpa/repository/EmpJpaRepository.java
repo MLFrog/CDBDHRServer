@@ -10,7 +10,12 @@ import com.cdbd.hr.infrastructure.jpa.entity.EmpJpaEntity;
 @Repository
 public interface EmpJpaRepository extends JpaRepository<EmpJpaEntity, Long> {
 	
-	 Optional<EmpJpaEntity> findByEmpId(String empId);
+	//사번을 기준으로 조회
+	Optional<EmpJpaEntity> findByEmpId(String empI);
+
+	//사번을 기준으로 삭제
+	void deleteByEmpId(String empId);
+	
 
 }
 
