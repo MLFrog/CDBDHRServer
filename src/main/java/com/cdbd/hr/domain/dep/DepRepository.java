@@ -11,7 +11,6 @@ public interface DepRepository {
 
 	List<Department> getAllDepartment();
 	
-	Department findByDepCode(DepCode depCode);
-	
-	Department findByDepName(String depNamde);
+	Department findByDepCodeIgnoreCase(DepCode depCode);
+
 }

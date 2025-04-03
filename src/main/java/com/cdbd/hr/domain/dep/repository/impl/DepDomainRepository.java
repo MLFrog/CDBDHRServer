@@ -26,7 +26,6 @@ public class DepDomainRepository implements DepRepository{
 	public void save(Department department)
 	{
     	Assert.notNull(department, "회원 엔티티는 Null일 수 없습니다.");
-    	System.out.println("JpaDepRepository의 insert까지는 탐" + department);
         this.jpaRepository.save(JpaConverter(department));
 	}
 	
@@ -45,22 +44,17 @@ public class DepDomainRepository implements DepRepository{
 	}
     
     @Override
-    public Department findByDepCode(DepCode depCode)
+    public Department findByDepCodeIgnoreCase(DepCode depCode)
     {
     	return this.domainconverter(this.jpaRepository.findByDepCode(String.valueOf(depCode)).orElse(null));
     }
     
     
-    @Override
-    public Department findByDepName(String depName)
-    {
-    	return this.domainconverter(this.jpaRepository.findByDepName(depName).orElse(null));
-    }
-    
     private DepJpaEntity JpaConverter(Department data) { 
         DepJpaEntity obj = new DepJpaEntity();
 
         obj.setDepCode(String.valueOf(Optional.ofNullable(data.getDepCode()).orElse(null)));
+        obj.setDepName(String.valueOf(Optional.ofNullable(data.getDepName()).orElse(null)));
         obj.setPDepCode(Optional.ofNullable(data.getPDepCode()).orElse(null));
         obj.setCDepCode(Optional.ofNullable(data.getCDepCode()).orElse(null));
         obj.setTDepYn(Optional.ofNullable(data.getTDepYn()).orElse("N"));

@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -39,8 +40,8 @@ public class EmpDepJpaRepositoryTest extends JpaRepositoryTest {
         depJpaEntity.setTDepYn("Y");
         depJpaEntity.setStaYmd("20240101");
         depJpaEntity.setEndYmd("99991231");
-        depJpaEntity.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        depJpaEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        depJpaEntity.setCreatedAt(LocalDateTime.now());  
+        depJpaEntity.setUpdatedAt(LocalDateTime.now()); 
 
         depJpaRepository.save(depJpaEntity);  // 부서 저장
 

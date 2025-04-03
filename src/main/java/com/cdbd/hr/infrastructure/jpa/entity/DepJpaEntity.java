@@ -1,6 +1,6 @@
 package com.cdbd.hr.infrastructure.jpa.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.Comment;
 
@@ -23,11 +23,11 @@ public class DepJpaEntity {
 	@Column(name = "id")
     private Long id;
 	
-	@Column(name = "dep_code")
+	@Column(name = "dep_code", nullable = false)
 	@Comment("부서코드")
 	private String depCode;
 
-    @Column(name = "dep_name")
+    @Column(name = "dep_name", nullable = false)
     @Comment("부서명")
     private String depName;
 	
@@ -43,19 +43,19 @@ public class DepJpaEntity {
 	@Comment("최상위부서여부")
 	private String tDepYn;
 
-	@Column(name = "sta_ymd")
+	@Column(name = "sta_ymd", nullable = false)
 	@Comment("시작일")
 	private String staYmd;
 
-	@Column(name = "end_ymd")
+	@Column(name = "end_ymd", nullable = false)
 	@Comment("종료일")
 	private String endYmd;
 
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "created_at")
 	@Comment("생성일시")
-	private Timestamp createdAt;
+	private LocalDateTime createdAt;
 
-	@Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "updated_at")
 	@Comment("수정일시")
-	private Timestamp updatedAt;
+	private LocalDateTime updatedAt;
 }

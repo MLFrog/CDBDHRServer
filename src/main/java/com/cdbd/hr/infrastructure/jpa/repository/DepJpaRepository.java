@@ -11,9 +11,9 @@ import com.cdbd.hr.infrastructure.jpa.entity.DepJpaEntity;
 public interface DepJpaRepository extends JpaRepository<DepJpaEntity, Long> {
 	
 	//부서ID를 기준으로 조회
-	Optional<DepJpaEntity> findByDepId(String depId);
+	Optional<DepJpaEntity> findByDepCode(String depCode);
 	
 	//부서ID를 기준으로 삭제
-	void deleteByDepId(String depId);
+	void deleteByDepCode(String depcode);
 }
 
