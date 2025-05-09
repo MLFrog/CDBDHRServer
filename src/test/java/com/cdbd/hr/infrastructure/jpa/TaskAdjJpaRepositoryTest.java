@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,16 +65,17 @@ public class TaskAdjJpaRepositoryTest extends JpaRepositoryTest {
         taskAdjJpaRepository.save(taskAdjJpaEntity);
 
         // when: 데이터 조회
-        TaskAdjJpaEntity foundEntity = taskAdjJpaRepository.findById("E001").orElse(null);
+        Optional<TaskAdjJpaEntity> foundEntity = taskAdjJpaRepository.findByEmpIdAndStdYmd("E001", "20241226");
 
         // then: 조회된 데이터 검증
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getEmpId()).isEqualTo("E001");
-        assertThat(foundEntity.getAdjType()).isEqualTo("출장");
-        assertThat(foundEntity.getStdYmd()).isEqualTo("20241226");
+        TaskAdjJpaEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 업무 가감 데이터가 존재하지 않습니다."));
+        assertThat(entity.getEmpId()).isEqualTo("E001");
+        assertThat(entity.getAdjType()).isEqualTo("출장");
+        assertThat(entity.getStdYmd()).isEqualTo("20241226");
 
-        logger.info("업무 가감 조회 테스트 완료: {}", foundEntity);
+        logger.info("업무 가감 조회 테스트 완료: {}", entity);
     }
+
 
     @Test
     @Transactional
@@ -85,7 +87,7 @@ public class TaskAdjJpaRepositoryTest extends JpaRepositoryTest {
         taskAdjJpaRepository.deleteByEmpIdAndStdYmd("E001", "20241226");
 
         // then: 삭제 후 조회하여 null 반환되는지 검증
-        TaskAdjJpaEntity foundEntity = taskAdjJpaRepository.findByEmpIdAndStdYmd("E001", "20241226");
+        Optional<TaskAdjJpaEntity> foundEntity = taskAdjJpaRepository.findByEmpIdAndStdYmd("E001", "20241226");
 
         assertThat(foundEntity).isNull();
 

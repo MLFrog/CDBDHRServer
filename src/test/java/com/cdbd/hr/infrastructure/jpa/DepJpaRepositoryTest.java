@@ -2,7 +2,8 @@ package com.cdbd.hr.infrastructure.jpa;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,22 +32,22 @@ public class DepJpaRepositoryTest extends JpaRepositoryTest {
         depJpaEntity.setPDepCode("PD001");
         depJpaEntity.setCDepCode("CD001");
         depJpaEntity.setTDepYn("Y");
-        depJpaEntity.setStaYmd("2024-01-01");
-        depJpaEntity.setEndYmd("2025-01-01");
-        depJpaEntity.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        depJpaEntity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        depJpaEntity.setStaYmd("20240101"); 
+        depJpaEntity.setEndYmd("99991231"); 
+        depJpaEntity.setCreatedAt(LocalDateTime.now());  
+        depJpaEntity.setUpdatedAt(LocalDateTime.now()); 
 
-        logger.info("객체생성확인: {}", depJpaEntity);
+        depJpaRepository.save(depJpaEntity); // 사전 저장
+        logger.info("객체생성 및 저장 완료: {}", depJpaEntity);
     }
 
     @Test
     public void 부서생성하기() {
-        // given: Entity가 준비되었음
+        // when: 엔티티를 저장하고 반환된 객체 확인
+        Optional<DepJpaEntity> savedEntityOpt = depJpaRepository.findByDepCode("D001");
+        DepJpaEntity savedEntity = savedEntityOpt.orElseThrow(() -> new AssertionError("저장된 부서가 없습니다."));
 
-        // when: 데이터를 저장하고 반환된 엔티티를 확인
-        DepJpaEntity savedEntity = depJpaRepository.save(depJpaEntity);
-
-        // then: 저장된 엔티티의 필드 값이 정확한지 검증
+        // then: 저장된 엔티티의 필드 값 검증
         assertThat(savedEntity.getDepCode()).isEqualTo("D001");
         assertThat(savedEntity.getDepName()).isEqualTo("영업부");
         assertThat(savedEntity.getPDepCode()).isEqualTo("PD001");
@@ -61,34 +62,28 @@ public class DepJpaRepositoryTest extends JpaRepositoryTest {
     }
 
     @Test
-    public void 부서조회하기() {
-        // given: Entity를 저장
-        depJpaRepository.save(depJpaEntity);
-
+    public void 부서ID로조회하기() {
         // when: 특정 depCode로 엔티티를 조회
-        DepJpaEntity foundEntity = depJpaRepository.findById("D001").orElse(null);
+        Optional<DepJpaEntity> foundEntity = depJpaRepository.findByDepCode("D001");
 
-        // then: 조회된 엔티티의 값이 맞는지 확인
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getDepCode()).isEqualTo("D001");
-        assertThat(foundEntity.getDepName()).isEqualTo("영업부");
-        assertThat(foundEntity.getPDepCode()).isEqualTo("PD001");
+        // then: 조회된 엔티티 검증
+        DepJpaEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 부서가 존재하지 않습니다."));
+        assertThat(entity.getDepCode()).isEqualTo("D001");
+        assertThat(entity.getDepName()).isEqualTo("영업부");
+        assertThat(entity.getPDepCode()).isEqualTo("PD001");
 
-        logger.info("부서 조회 테스트 완료: {}", foundEntity);
+        logger.info("부서 조회 테스트 완료: {}", entity);
     }
 
     @Test
     public void 부서삭제하기() {
-        // given: Entity 저장
-        depJpaRepository.save(depJpaEntity);
-
         // when: 엔티티 삭제
-        depJpaRepository.deleteById("D001");
+        depJpaRepository.deleteByDepCode("D001");
 
-        // then: 삭제 후 조회하여 null 반환되는지 확인
-        DepJpaEntity foundEntity = depJpaRepository.findById("D001").orElse(null);
+        // then: 삭제 후 존재 여부 확인
+        Optional<DepJpaEntity> foundEntity = depJpaRepository.findByDepCode("D001");
 
-        assertThat(foundEntity).isNull();
+        assertThat(foundEntity.isPresent()).isFalse(); // 수정됨
         logger.info("부서 삭제 테스트 완료. 삭제된 부서: D001");
     }
 }

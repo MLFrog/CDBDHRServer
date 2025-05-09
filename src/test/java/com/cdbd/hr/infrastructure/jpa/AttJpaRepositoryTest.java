@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,15 +71,16 @@ public class AttJpaRepositoryTest extends JpaRepositoryTest {
         attJpaRepository.save(attJpaEntity);
 
         // when: 특정 empId와 stdYmd로 엔티티 조회
-        AttJpaEntity foundEntity = attJpaRepository.findById("E001").orElse(null);
+        Optional<AttJpaEntity> foundEntity = attJpaRepository.findByEmpIdAndStdYmd("E001", "20241222");
 
         // then: 조회된 엔티티 값 검증
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getEmpId()).isEqualTo("E001");
-        assertThat(foundEntity.getStdYmd()).isEqualTo("20241222");
+        AttJpaEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 엔티티가 존재하지 않습니다."));
+        assertThat(entity.getEmpId()).isEqualTo("E001");
+        assertThat(entity.getStdYmd()).isEqualTo("20241222");
 
-        logger.info("근태 조회 테스트 완료: {}", foundEntity);
+        logger.info("근태 조회 테스트 완료: {}", entity);
     }
+
 
     @Test
     @Transactional
@@ -90,7 +92,7 @@ public class AttJpaRepositoryTest extends JpaRepositoryTest {
         attJpaRepository.deleteByEmpIdAndStdYmd("E001", "20241222");
 
         // then: 삭제 후 조회하여 null 반환되는지 검증
-        AttJpaEntity foundEntity = attJpaRepository.findByEmpIdAndStdYmd("E001", "20241222");
+        Optional<AttJpaEntity> foundEntity = attJpaRepository.findByEmpIdAndStdYmd("E001", "20241222");
 
         assertThat(foundEntity).isNull();
         logger.info("근태 삭제 테스트 완료. 삭제된 근태 : 사번(E001) 기준일(20241222)");

@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,15 +57,16 @@ public class EmpIdJpaRepositoryTest extends JpaRepositoryTest{
         empIdJpaRepository.save(empIdJpaEntity);
 
         // when: 특정 empId로 엔티티를 조회
-        EmpIdJpaEntity foundEntity = empIdJpaRepository.findById("E001").orElse(null);
+        Optional<EmpIdJpaEntity> foundEntity = empIdJpaRepository.findByEmpId("E001");
 
         // then: 조회된 엔티티의 값이 맞는지 확인
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getEmpId()).isEqualTo("E001");
-        assertThat(foundEntity.getUseYn()).isEqualTo("Y");
+        EmpIdJpaEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 사번이 존재하지 않습니다."));
+        assertThat(entity.getEmpId()).isEqualTo("E001");
+        assertThat(entity.getUseYn()).isEqualTo("Y");
 
-        logger.info("사번 조회 테스트 완료: {}", foundEntity);
+        logger.info("사번 조회 테스트 완료: {}", entity);
     }
+
 
     @Test
     public void 사번삭제하기() {
@@ -72,10 +74,10 @@ public class EmpIdJpaRepositoryTest extends JpaRepositoryTest{
         empIdJpaRepository.save(empIdJpaEntity);
 
         // when: 엔티티 삭제
-        empIdJpaRepository.deleteById("E001");
+        empIdJpaRepository.deleteByEmpId("E001");
 
         // then: 삭제 후 조회하여 null 반환되는지 확인
-        EmpIdJpaEntity foundEntity = empIdJpaRepository.findById("E001").orElse(null);
+        Optional<EmpIdJpaEntity> foundEntity = empIdJpaRepository.findByEmpId("E001");
 
         assertThat(foundEntity).isNull();
         logger.info("사번 삭제 테스트 완료. 삭제된 사번: E001");

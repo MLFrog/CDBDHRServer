@@ -2,14 +2,15 @@ package com.cdbd.hr.domain.dep;
 
 import java.util.List;
 
+import com.cdbd.hr.domain.dep.IDTypes.DepCode;
+
 public interface DepRepository {
 	void save(Department board);
 
-	void update(Department board);
-
-	void delete(String boardId);
+	void delete(DepCode depCode);
 
 	List<Department> getAllDepartment();
 	
-	List<Department> findAllByOrderByDepCodeAsc();
+	Department findByDepCodeIgnoreCase(DepCode depCode);
+
 }

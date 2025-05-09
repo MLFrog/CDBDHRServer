@@ -3,6 +3,7 @@ package com.cdbd.hr.infrastructure.jpa;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,17 +61,18 @@ public class ShiftJpaRepositoryTest extends JpaRepositoryTest {
         shiftJpaRepository.save(shiftJpaEntity);
 
         // when: ID를 기준으로 데이터 조회
-        ShiftJpaEntity foundEntity = shiftJpaRepository.findById("S001").orElse(null);
+        Optional<ShiftJpaEntity> foundEntity = shiftJpaRepository.findByShiftId("S001");
 
         // then: 조회된 값 검증
-        assertThat(foundEntity).isNotNull();
-        assertThat(foundEntity.getShiftId()).isEqualTo("S001");
-        assertThat(foundEntity.getShiftName()).isEqualTo("사무직");
-        assertThat(foundEntity.getBaseDay()).isEqualTo("월요일");
-        assertThat(foundEntity.getUseYn()).isEqualTo("Y");
+        ShiftJpaEntity entity = foundEntity.orElseThrow(() -> new AssertionError("조회된 근무조가 존재하지 않습니다."));
+        assertThat(entity.getShiftId()).isEqualTo("S001");
+        assertThat(entity.getShiftName()).isEqualTo("사무직");
+        assertThat(entity.getBaseDay()).isEqualTo("월요일");
+        assertThat(entity.getUseYn()).isEqualTo("Y");
 
-        logger.info("근무조 조회 테스트 완료: {}", foundEntity);
+        logger.info("근무조 조회 테스트 완료: {}", entity);
     }
+
 
     @Test
     public void 근무조삭제하기() {
@@ -78,10 +80,10 @@ public class ShiftJpaRepositoryTest extends JpaRepositoryTest {
         shiftJpaRepository.save(shiftJpaEntity);
 
         // when: 데이터 삭제
-        shiftJpaRepository.deleteById("S001");
+        shiftJpaRepository.deleteByShiftId("S001");
 
         // then: 삭제 확인
-        ShiftJpaEntity foundEntity = shiftJpaRepository.findById("S001").orElse(null);
+        Optional<ShiftJpaEntity> foundEntity = shiftJpaRepository.findByShiftId("S001");
         assertThat(foundEntity).isNull();
 
         logger.info("근무조 삭제 테스트 완료. 삭제된 근무조 ID: S001");
